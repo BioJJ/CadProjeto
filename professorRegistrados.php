@@ -46,11 +46,11 @@ $professor = new Professor();
 
         endif;
         ?>
-        
+
         <?php
         if (isset($_GET['acao']) && $_GET['acao'] == 'pesquisar'):
 
-            $pesq = (int) $_GET['nome'];
+            $pesq =  $_GET['pesq'];
             if ($professor->listagem($pesq)) {
                 
             }
@@ -70,12 +70,12 @@ $professor = new Professor();
                             <div class="panel-body">
                                 <form method="post" action>
                                     <br><div class="col-md-9">
-                                        <input type="text" name="nome" placeholder="Pesquisar Professor" value="<?= (!empty($_POST['nome']) ? $_POST['nome'] : '' ) ?>" class="form-control col-md-4" >
+                                        <input type="text" name="pesq" placeholder="Pesquisar Professor" class="form-control col-md-4" >
                                     </div>
 
                                     <div class="visible-lg visible-md">
                                         <div class="col-md-1">
-                                            <button type="submit" class="btn btn-default" onclick="location = 'registrarProfessor.php?acao=pesquisar&pesq=<?= $value->nome; ?>'"> <b class="glyphicon glyphicon-search"></b> </button>
+                                            <button type="submit" class="btn btn-default" onclick="location = 'registrarProfessor.php?acao=pesquisar&pesq=<?= $_GET['pesq'] ?>'"> <b class="glyphicon glyphicon-search"></b> </button>
                                         </div>
                                         <div class="col-md-2">
                                             <button type="button" style="margin-left: 30px" onclick="location = 'registrarProfessor.php'" class="btn btn-sm btn-default" ><b> Registrar</b> </button>
@@ -108,7 +108,7 @@ $professor = new Professor();
                                                     <td><?php echo $value->data_nascimento; ?></td>
                                                     <td width="12%">
                                                         <button type="button" onclick="location = 'registrarProfessor.php?acao=editar&id_professor=<?= $value->id_professor; ?>'" class="btn btn-sm btn-primary" ><b class=" glyphicon glyphicon-edit"></b> </button>
-                                                        <button type="button" onclick="location = 'professorRegistrados.php?acao=deletar&id_professor=<?= $value->id_professor; ?>'" class="btn btn-sm btn-success" ><b class="glyphicon glyphicon-share"></b> </button>
+                                                        <button type="button" onclick="location = 'professorRegistrados.php?acao=deletar&id_professor=<?= $value->id_professor; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

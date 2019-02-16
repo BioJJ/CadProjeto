@@ -10,7 +10,7 @@ $aluno = new Aluno();
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cursos</title>
-        <link href="css/bootstrap-theme.min.css">
+        <!--<link href="css/bootstrap-theme.min.css">-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
 
@@ -42,13 +42,14 @@ $aluno = new Aluno();
 
             $aluno = (int) $_GET['id_aluno'];
             if ($aluno->delete($aluno)) {
+                
             }
         endif;
         ?>
         <section id="main">
             <div class="container">
                 <div class="row">
-                    <?php include './menuLateral.php'; ?>
+<?php include './menuLateral.php'; ?>
                     <div class="col-md-9">
                         <div class="panel panel-default">
                             <div class="panel-heading main-color-bg">
@@ -84,27 +85,27 @@ $aluno = new Aluno();
                                             <thead>
                                             <th>#</th>
                                             <th>Nome do Aluno</th>
-                                            <th>Data de Nascimento</th>
+                                            <th style="text-align: center">Data de Nascimento</th>
                                             <th>Curso</th>
-                                            <th>Detalhes</th>
+                                            <th style="text-align: center">Detalhes</th>
                                             <th></th>
                                             </thead>
 
-                                            <?php foreach ($aluno->findAllComInner() as $key => $value): ?>
+<?php foreach ($aluno->findAllComInner() as $key => $value): ?>
                                                 <tr>
                                                     <td><?php echo $value->id_aluno; ?></td>
                                                     <td><?php echo $value->nome; ?></td>
-                                                    <td><?php echo $value->data_nascimento; ?></td>
+                                                    <td style="text-align: center"><?php echo $value->data_nascimento; ?></td>
                                                     <td><?php echo $value->curso; ?></td>
-                                                    <td>
-                                                        <a href="" type="button" data-toggle="modal" data-target="#myModalpg1">Endereço</a>
+                                                    <td style="text-align: center">
+                                                        <a href="#"  onclick="location = 'AlunoRegistrados.php?acao=pesq&id_aluno=<?= $value->id_aluno; ?>'" type="button" data-toggle="modal" data-target="#myModalpg1"class="glyphicon glyphicon-book"></a>
                                                     </td>
                                                     <td width="12%">
                                                         <button type="button" onclick="location = 'registrarAluno.php?acao=editar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-primary" ><b class=" glyphicon glyphicon-edit"></b> </button>
-                                                        <button type="button" onclick="location = 'AlunoRegistrados.php?acao=deletar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-success" ><b class="glyphicon glyphicon-share"></b> </button>
+                                                        <button type="button" onclick="location = 'AlunoRegistrados.php?acao=deletar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
+<?php endforeach; ?>
                                         </table>
                                     </div>
                                 </form>
@@ -137,19 +138,25 @@ $aluno = new Aluno();
                                     <th></th>
                                     </thead>
 
-                                    <?php foreach ($aluno->findAllComInner() as $key => $value): ?>
+                                    <?php
+                                    if (isset($_GET['acao']) && $_GET['acao'] == 'pesq') {
+
+                                        $id_aluno = (int) $_GET['id_aluno'];
+                                        $resultado = $aluno->find($id_aluno);
+                                        ?>
+
                                         <tr>
-                                            <td><?php echo $value->logradouro; ?></td>
-                                            <td><?php echo $value->numero; ?></td>
-                                            <td><?php echo $value->bairro; ?></td>
-                                            <td><?php echo $value->cidade; ?></td>
-                                            <td><?php echo $value->estado; ?></td>
-                                            <td><?php echo $value->cep; ?></td>
+                                            <td><?php echo $resultado->logradouro; ?></td>
+                                            <td><?php echo $resultado->numero; ?></td>
+                                            <td><?php echo $resultado->bairro; ?></td>
+                                            <td><?php echo $resultado->cidade; ?></td>
+                                            <td><?php echo $resultado->estado; ?></td>
+                                            <td><?php echo $resultado->cep; ?></td>
                                             <td>
 
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
+<?php } ?>
                                 </table>
                             </div>
                         </div>
@@ -160,8 +167,8 @@ $aluno = new Aluno();
                 </div>
             </div>
         </section>
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 
 
         <script src="js/bootstrap.min.js"></script>

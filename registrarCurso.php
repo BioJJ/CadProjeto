@@ -111,7 +111,7 @@ $curso = new Curso();
                                             <br>
                                             <b>Professor</b>
                                             <select name="idprofessor"  class="form-control col-md-4"required >
-                                                <option selected="true" > <?php echo $resultado2->professor; ?></option>
+                                                <option selected="true" value="<?php echo $resultado2->id_professor; ?>"> <?php echo $resultado2->professor; ?></option>
 
                                                 <?php foreach ($curso->findAllProfessor() as $key => $value): ?>
                                                     <option  value="<?php echo $value->id_professor; ?>"> <?php echo $value->nome; ?>  </option>

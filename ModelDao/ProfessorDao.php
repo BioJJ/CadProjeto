@@ -38,7 +38,7 @@ abstract class ProfessorDao extends DB {
         $stmt = DB::prepare($sql);
         $stmt->bindParam(':nome', "%$nome%");
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
 }

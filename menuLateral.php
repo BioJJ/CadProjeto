@@ -8,5 +8,6 @@
         <a href="professorRegistrados.php" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Professor </a>
         <a href="AlunoRegistrados.php" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Aluno </a>
         <a href="cursosRegistrados.php" class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Curso</a>
+        <a href="GerarRelatorio.php" class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Gerar Relatório</a>
     </div>
 </div>

@@ -101,7 +101,7 @@ $curso = new Curso();
 
                                                     <td width="12%">
                                                         <button type="button" onclick="location = 'registrarCurso.php?acao=editar&id_curso=<?= $value->id_curso; ?>'" class="btn btn-sm btn-primary" ><b class=" glyphicon glyphicon-edit"></b> </button>
-                                                        <button type="button" onclick="location = 'cursosRegistrados.php?acao=deletar&id_curso=<?= $value->id_curso; ?>'" class="btn btn-sm btn-success" ><b class="glyphicon glyphicon-share"></b> </button>
+                                                        <button type="button" onclick="location = 'cursosRegistrados.php?acao=deletar&id_curso=<?= $value->id_curso; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
