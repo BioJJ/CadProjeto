@@ -62,4 +62,23 @@ abstract class AlunoDao extends DB {
         return $stmt->execute();
     }
 
+    public function listagem($nome) {
+//        $sql = "select *from  aluno where nome like :nome";
+        $sql = "SELECT a.id_aluno, a.nome, a.data_nascimento, a.logradouro, a.numero, a.bairro, a.cidade, a.estado, a.data_criacao, a.cep, c.nome as curso from aluno a INNER JOIN curso c ON a.id_aluno=c.id_curso where a.nome like :nome";
+        $stmt = DB::prepare($sql);
+        $stmt->bindValue(':nome', "%$nome%");
+        $stmt->execute();
+        $resultado = $stmt->fetchAll();
+        return $resultado;
+    }
+    public function listagemEndereco($id_aluno) {
+//        $sql = "select *from  aluno where nome like :nome";
+        $sql = "SELECT a.id_aluno, a.nome, a.data_nascimento, a.logradouro, a.numero, a.bairro, a.cidade, a.estado, a.data_criacao, a.cep, c.nome as curso from aluno a INNER JOIN curso c ON a.id_aluno=c.id_curso where a.id_aluno like :id_aluno";
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam(':id_aluno', $id_aluno, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll();
+        return $resultado;
+    }
+
 }

@@ -92,7 +92,11 @@ $curso = new Curso();
                                             <th></th>
                                             </thead>
 
-                                            <?php foreach ($curso->findAllComInner() as $key => $value): ?>
+                                            <?php
+                                            $dados = $curso->listagem((!empty($_POST['nome']) ? $_POST['nome'] : ''));
+                                            if (!empty($dados)) {
+                                                foreach ($dados as $key => $value) {
+                                                    ?>
                                                 <tr>
                                                     <td><?php echo $value->id_curso; ?></td>
                                                     <td><?php echo $value->nome; ?></td>
@@ -104,7 +108,12 @@ $curso = new Curso();
                                                         <button type="button" onclick="location = 'cursosRegistrados.php?acao=deletar&id_curso=<?= $value->id_curso; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
+                                           <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <tr><td>Curso não existente</td></tr>
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </form>

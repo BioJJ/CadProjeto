@@ -1,7 +1,6 @@
 <?php
 require 'ModelBean/Aluno.php';
 $aluno = new Aluno();
-
 ?>
 
 <!DOCTYPE html>
@@ -92,21 +91,78 @@ $aluno = new Aluno();
                                             <th></th>
                                             </thead>
 
-                                            <?php foreach ($aluno->findAllComInner() as $key => $value): ?>
-                                                <tr>
-                                                    <td><?php echo $value->id_aluno; ?></td>
-                                                    <td><?php echo $value->nome; ?></td>
-                                                    <td style="text-align: center"><?php echo  $aluno->inverterData($value->data_nascimento); ?></td>
-                                                    <td><?php echo $value->curso; ?></td>
-                                                    <td style="text-align: center">
-                                                        <a href="#"  onclick="location = 'AlunoRegistrados.php?acao=pesq&id_aluno=<?= $value->id_aluno; ?>'" type="button" data-toggle="modal" data-target="#myModalpg1"class="glyphicon glyphicon-book"></a>
-                                                    </td>
-                                                    <td width="12%">
-                                                        <button type="button" onclick="location = 'registrarAluno.php?acao=editar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-primary" ><b class=" glyphicon glyphicon-edit"></b> </button>
-                                                        <button type="button" onclick="location = 'AlunoRegistrados.php?acao=deletar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                            <?php
+                                            $dados = $aluno->listagem((!empty($_POST['nome']) ? $_POST['nome'] : ''));
+                                            if (!empty($dados)) {
+                                                foreach ($dados as $key => $value) {
+                                                    ?>
+                                                    <tr>
+
+                                                        <td><?php echo $value->id_aluno; ?></td>
+                                                        <td><?php echo $value->nome; ?></td>
+                                                        <td style="text-align: center"><?php echo $aluno->inverterData($value->data_nascimento); ?></td>
+                                                        <td><?php echo $value->curso; ?></td>
+                                                        <td style="text-align: center">
+                                                            <a href="#"   type="button" data-toggle="modal" data-target="#myModalpg1<?php echo $value->id_aluno; ?>"class="glyphicon glyphicon-book"></a>
+
+
+                                                            <div class="modal fade" id="myModalpg1<?php echo $value->id_aluno; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label=""><span aria-hidden="true">&times;</span></button>
+                                                                            <h3 class="panel-title"><b>Detalhes do Endereço</b></h3>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="col-md-12">
+                                                                                <BR> 
+
+                                                                                <table class="table">
+                                                                                    <thead>
+
+                                                                                    <th>Logradouro</th>
+                                                                                    <th>Numero</th>
+                                                                                    <th>Bairro</th>
+                                                                                    <th>cidade</th>
+                                                                                    <th>Estado</th>
+                                                                                    <th>Cep</th>
+                                                                                    <th></th>
+                                                                                    </thead>
+
+                                                                                    <tr>
+                                                                                        <td><?php echo $value->logradouro; ?></td>
+                                                                                        <td><?php echo $value->numero; ?></td>
+                                                                                        <td><?php echo $value->bairro; ?></td>
+                                                                                        <td><?php echo $value->cidade; ?></td>
+                                                                                        <td><?php echo $value->estado; ?></td>
+                                                                                        <td><?php echo $value->cep; ?></td>
+                                                                                        <td>
+
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </td>
+                                                        <td width="12%">
+                                                            <button type="button" name="id_clicado" value="<?= $value->id_aluno; ?>" onclick="location = 'registrarAluno.php?acao=editar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-primary" ><b class=" glyphicon glyphicon-edit"></b></button>
+                                                            <button type="button" onclick="location = 'AlunoRegistrados.php?acao=deletar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <tr><td>Aluno não existente</td></tr>
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </form>
@@ -116,57 +172,7 @@ $aluno = new Aluno();
                 </div>
             </div>
 
-            <div class="modal fade" id="myModalpg1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label=""><span aria-hidden="true">&times;</span></button>
-                            <h1> Endereço Do Aluno</h1>
-                        </div>
-                        <div class="modal-body">
-                            <div class="col-md-12">
-                                <BR> 
 
-                                <table class="table">
-                                    <thead>
-
-                                    <th>Logradouro</th>
-                                    <th>Numero</th>
-                                    <th>Bairro</th>
-                                    <th>cidade</th>
-                                    <th>Estado</th>
-                                    <th>Cep</th>
-                                    <th></th>
-                                    </thead>
-
-                                    <?php
-                                    if (isset($_GET['acao']) && $_GET['acao'] == 'pesq') {
-
-                                        $id_aluno = (int) $_GET['id_aluno'];
-                                        $resultado = $aluno->find($id_aluno);
-                                        ?>
-
-                                        <tr>
-                                            <td><?php echo $resultado->logradouro; ?></td>
-                                            <td><?php echo $resultado->numero; ?></td>
-                                            <td><?php echo $resultado->bairro; ?></td>
-                                            <td><?php echo $resultado->cidade; ?></td>
-                                            <td><?php echo $resultado->estado; ?></td>
-                                            <td><?php echo $resultado->cep; ?></td>
-                                            <td>
-
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

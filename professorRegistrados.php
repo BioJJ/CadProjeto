@@ -57,13 +57,8 @@ $professor = new Professor();
             if ($professor->delete($id_professor)) {
                 
             }
-
         endif;
         ?>
-
-
-
-
 
         <section id="main">
             <div class="container">
@@ -77,14 +72,13 @@ $professor = new Professor();
                             <div class="panel-body">
                                 <form method="post" action>
                                     <br><div class="col-md-9">
-                                        <input type="text" name="pesq" placeholder="Pesquisar Professor" value="<?= (!empty($_POST['pesq']) ? $_POST['pesq'] : '' ) ?>" class="form-control col-md-4" >
+                                        <input type="text" name="nome" placeholder="Pesquisar Professor" value="<?= (!empty($_POST['nome']) ? $_POST['nome'] : '' ) ?>" class="form-control col-md-4" >
                                     </div>
 
                                     <div class="visible-lg visible-md">
                                         <div class="col-md-1">
-                                            <button type="submit"  name="pesquisar"  class="btn btn-default"
-                                                    onclick="location = 'professorRegistrados.php?acao=pesquisar&pesq=<?=$_Get['pesq']; ?>'">
-                                                <b class="glyphicon glyphicon-search"></b> 
+                                            <button type="submit" class="btn btn-default">
+                                                <b class="glyphicon glyphicon-search"> </b> 
                                             </button>
                                         </div>
                                         <div class="col-md-2">
@@ -94,12 +88,7 @@ $professor = new Professor();
 
                                     <div class="col-md-12">
                                         <BR> 
-                                        <?php
-                                        if (!empty($_POST['pesquisar'])) {
-                                        
-                                        $pesq = $_GET['pesq'];
-                                        $pesquisado = $professor->listagem($pesq);
-                                        ?>
+
                                         <table class="table ">
                                             <thead>
                                             <th>#</th>
@@ -107,28 +96,11 @@ $professor = new Professor();
                                             <th>Data de Nascimento</th>
                                             <th></th>
                                             </thead>
-
-                                            <tr>
-                                                <td><?php echo $pesquisado->id_professor; ?></td> 
-                                                <td><?php echo $pesquisado->nome; ?></td>
-                                                <td ><?php echo $professor->inverterData($pesquisado->data_nascimento); ?> </td>
-                                                <td width="12%">
-                                                    <button type="button" onclick="location = 'registrarProfessor.php?acao=editar&id_professor=<?= $value->id_professor; ?>'" class="btn btn-sm btn-primary" ><b class=" glyphicon glyphicon-edit"></b> </button>
-                                                    <button type="button" onclick="location = 'professorRegistrados.php?acao=deletar&id_professor=<?= $value->id_professor; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
-                                                </td>
-                                            </tr>
-
-                                        </table>
-
-                                        <?php } else { ?>
-                                            <table class="table ">
-                                                <thead>
-                                                <th>#</th>
-                                                <th>Nome</th>
-                                                <th>Data de Nascimento</th>
-                                                <th></th>
-                                                </thead>
-                                                <?php foreach ($professor->findAll() as $key => $value): ?>
+                                            <?php
+                                            $dados = $professor->listagem((!empty($_POST['nome']) ? $_POST['nome'] : ''));
+                                            if (!empty($dados)) {
+                                                foreach ($dados as $key => $value) {
+                                                    ?>
                                                     <tr>
                                                         <td><?php echo $value->id_professor; ?></td> 
                                                         <td><?php echo $value->nome; ?></td>
@@ -138,10 +110,15 @@ $professor = new Professor();
                                                             <button type="button" onclick="location = 'professorRegistrados.php?acao=deletar&id_professor=<?= $value->id_professor; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
                                                         </td>
                                                     </tr>
-                                                <?php endforeach; ?>
-                                            </table>
+                                                    <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <tr><td>Professor não existente</td></tr>
+                                            <?php } ?>
+                                        </table>
 
-                                        <?php } ?>
+
                                     </div>
                                 </form>
                             </div>
@@ -153,12 +130,3 @@ $professor = new Professor();
         <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
-
-<!--<div class="visible-sm visible-xs">
-    <div class="form-group">
-        <div class="col-md-4">
-            <br> <button type="submit" class="btn btn-default btn-sm"><b class="glyphicon glyphicon-search"></b> </button>
-            <button type="button"  onclick="location = 'professorRegistrados.php'" class="btn btn-sm btn-default" ><b> Registrar</b> </button>
-        </div>
-    </div>
-</div>-->

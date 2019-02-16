@@ -54,6 +54,16 @@ abstract class CursoDao extends DB {
         $stmt->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    
+    public function listagem($nome) {
+//        $sql = "select *from  curso where nome like :nome";
+        $sql = "SELECT c.id_curso, c.nome, c.data_criacao, p.nome as professor from curso c INNER JOIN professor p on c.idprofessor=p.id_professor where c.nome like :nome";
+        $stmt = DB::prepare($sql);
+        $stmt->bindValue(':nome', "%$nome%");
+        $stmt->execute();
+        $resultado =$stmt->fetchAll();
+        return $resultado;
+    }
        
     
 
