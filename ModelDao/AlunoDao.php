@@ -41,7 +41,7 @@ abstract class AlunoDao extends DB {
     }
 
     public function findAllComNome($id_aluno) {
-        $sql = "SELECT a.id_aluno, a.nome, c.nome as curso from aluno a INNER JOIN curso c on a.idcurso=c.id_curso where a.idcurso = :id_aluno";
+        $sql = "SELECT a.id_aluno, a.nome, a.idcurso, c.nome as curso from aluno a INNER JOIN curso c on a.idcurso=c.id_curso where a.idcurso = :id_aluno";
         $stmt = DB::prepare($sql);
         $stmt->bindParam(':id_aluno', $id_aluno, PDO::PARAM_INT);
         $stmt->execute();

@@ -34,11 +34,13 @@ abstract class ProfessorDao extends DB {
 
    
     public function listagem($nome) {
-        $sql = "select *from  professor where nome  like :nome";
+        $sql = "select *from  professor where nome like :nome";
         $stmt = DB::prepare($sql);
-        $stmt->bindParam(':nome', "%$nome%");
+        $stmt->bindParam(':nome', "'%$nome%'");
         $stmt->execute();
         return $stmt->fetch();
     }
+    
+   
 
 }

@@ -23,7 +23,7 @@ $professor = new Professor();
                 }
             }
         </script>
-     <script type="text/javascript">
+        <script type="text/javascript">
             function startTime() {
                 var today = new Date();
                 var h = today.getHours();
@@ -48,12 +48,12 @@ $professor = new Professor();
     </head>
     <body onload="startTime()">
 
-        <?php include './menuPrincipal.php'; ?>
+        <?php include './view/menuPrincipal.php'; ?>
         <?php
         if (isset($_POST['cadastrar'])):
 
             $nome = $_POST['nome'];
-            $data_nascimento = $_POST['data_nascimento'];
+            $data_nascimento = implode("-", array_reverse(explode("-", $_POST['data_nascimento'])));
 
             $professor->setNome($nome);
             $professor->setData_nascimento($data_nascimento);
@@ -72,6 +72,7 @@ $professor = new Professor();
             $id_professor = $_POST['id_professor'];
             $nome = $_POST['nome'];
             $data_nascimento = $_POST['data_nascimento'];
+            $data_nascimento = implode("-", array_reverse(explode("-", $_POST['data_nascimento'])));
 
             $professor->setNome($nome);
             $professor->setData_nascimento($data_nascimento);
@@ -85,7 +86,7 @@ $professor = new Professor();
         <section id="main">
             <div class="container">
                 <div class="row">
-                    <?php include './menuLateral.php'; ?>
+                    <?php include './view/menuLateral.php'; ?>
                     <div class="col-md-9">
                         <div class="panel panel-default">
                             <div class="panel-heading main-color-bg">
@@ -109,7 +110,7 @@ $professor = new Professor();
 
                                         <div class="col-md-12">
                                             <br> <b>Data de Nascimento</b>
-                                            <input type="text" name="data_nascimento" class="form-control col-md-4" value="<?php echo $resultado->data_nascimento; ?>"   required>
+                                            <input type="text" name="data_nascimento" class="form-control col-md-4" value="<?php echo $professor->inverterData($resultado->data_nascimento); ?>" onkeypress="formatarCampo(this, '##-##-####')" maxlength="10"  required>
                                         </div>
                                         <div class="col-md-12">
 
@@ -130,7 +131,7 @@ $professor = new Professor();
 
                                         <div class="col-md-12">
                                             <br> <b>Data de Nascimento</b>
-                                            <input type="text" name="data_nascimento" class="form-control col-md-4"  required>
+                                            <input type="text" name="data_nascimento" class="form-control col-md-4" onkeypress="formatarCampo(this, '##-##-####')" maxlength="10" required>
                                         </div>
 
 

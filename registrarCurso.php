@@ -48,7 +48,7 @@ $curso = new Curso();
     </head>
     <body onload="startTime()">
 
-        <?php include './menuPrincipal.php'; ?>
+        <?php include './view/menuPrincipal.php'; ?>
         <?php
         if (isset($_POST['cadastrar'])):
 
@@ -84,7 +84,7 @@ $curso = new Curso();
         <section id="main">
             <div class="container">
                 <div class="row">
-                    <?php include './menuLateral.php'; ?>
+                    <?php include './view/menuLateral.php'; ?>
                     <div class="col-md-9">
                         <div class="panel panel-default">
                             <div class="panel-heading main-color-bg">
@@ -111,10 +111,10 @@ $curso = new Curso();
                                             <br>
                                             <b>Professor</b>
                                             <select name="idprofessor"  class="form-control col-md-4"required >
-                                                <option selected="true" value="<?php echo $resultado2->id_professor; ?>"> <?php echo $resultado2->professor; ?></option>
+                                                <option selected="true" value="<?php echo $resultado2->idprofessor; ?>"> <?php echo $resultado2->idprofessor; ?> - <?php echo $resultado2->professor; ?></option>
 
                                                 <?php foreach ($curso->findAllProfessor() as $key => $value): ?>
-                                                    <option  value="<?php echo $value->id_professor; ?>"> <?php echo $value->nome; ?>  </option>
+                                                    <option  value="<?php echo $value->id_professor; ?>"><?php echo $value->id_professor; ?> - <?php echo $value->nome; ?>  </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -144,7 +144,7 @@ $curso = new Curso();
                                             <select name="idprofessor"  class="form-control col-md-4"required >
                                                 <option selected="true" >Selecione</option>
                                                 <?php foreach ($curso->findAllProfessor() as $key => $value): ?>
-                                                    <option value="<?php echo $value->id_professor; ?>"> <?php echo $value->nome; ?>  </option>
+                                                    <option value="<?php echo $value->id_professor; ?>"><?php echo $value->id_professor; ?> -  <?php echo $value->nome; ?>  </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>

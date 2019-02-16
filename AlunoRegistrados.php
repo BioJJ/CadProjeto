@@ -1,6 +1,7 @@
 <?php
-require './ModelBean/Aluno.php';
+require 'ModelBean/Aluno.php';
 $aluno = new Aluno();
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@ $aluno = new Aluno();
         }
     </script>
     <body onload="startTime()">
-        <?php include './menuPrincipal.php'; ?>
+        <?php include 'view/menuPrincipal.php'; ?>
         <?php
         if (isset($_GET['acao']) && $_GET['acao'] == 'deletar'):
 
@@ -49,7 +50,7 @@ $aluno = new Aluno();
         <section id="main">
             <div class="container">
                 <div class="row">
-<?php include './menuLateral.php'; ?>
+                    <?php include 'view/menuLateral.php'; ?>
                     <div class="col-md-9">
                         <div class="panel panel-default">
                             <div class="panel-heading main-color-bg">
@@ -91,11 +92,11 @@ $aluno = new Aluno();
                                             <th></th>
                                             </thead>
 
-<?php foreach ($aluno->findAllComInner() as $key => $value): ?>
+                                            <?php foreach ($aluno->findAllComInner() as $key => $value): ?>
                                                 <tr>
                                                     <td><?php echo $value->id_aluno; ?></td>
                                                     <td><?php echo $value->nome; ?></td>
-                                                    <td style="text-align: center"><?php echo $value->data_nascimento; ?></td>
+                                                    <td style="text-align: center"><?php echo  $aluno->inverterData($value->data_nascimento); ?></td>
                                                     <td><?php echo $value->curso; ?></td>
                                                     <td style="text-align: center">
                                                         <a href="#"  onclick="location = 'AlunoRegistrados.php?acao=pesq&id_aluno=<?= $value->id_aluno; ?>'" type="button" data-toggle="modal" data-target="#myModalpg1"class="glyphicon glyphicon-book"></a>
@@ -105,7 +106,7 @@ $aluno = new Aluno();
                                                         <button type="button" onclick="location = 'AlunoRegistrados.php?acao=deletar&id_aluno=<?= $value->id_aluno; ?>'" class="btn btn-sm btn-danger" ><b class="glyphicon glyphicon-remove-circle"></b> </button>
                                                     </td>
                                                 </tr>
-<?php endforeach; ?>
+                                            <?php endforeach; ?>
                                         </table>
                                     </div>
                                 </form>
@@ -156,7 +157,7 @@ $aluno = new Aluno();
 
                                             </td>
                                         </tr>
-<?php } ?>
+                                    <?php } ?>
                                 </table>
                             </div>
                         </div>
@@ -171,6 +172,6 @@ $aluno = new Aluno();
         <script src="js/bootstrap.min.js"></script>
 
 
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
     </body>
 </html>

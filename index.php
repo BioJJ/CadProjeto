@@ -35,22 +35,25 @@ $aluno = new Aluno();
         }
     </script>
     <body onload="startTime()">
-        <?php include './menuPrincipal.php'; ?>
+        <?php include './view/menuPrincipal.php'; ?>
 
 
         <section id="main">
             <div class="container">
                 <div class="row">
-                    <?php include './menuLateral.php'; ?>
+                    <?php include './view/menuLateral.php'; ?>
                     <div class="col-md-9">
                         <div class="panel panel-default">
                             <div class="panel-heading main-color-bg">
                                 <h3 class="panel-title"><b>Bem vindo</b></h3>
                             </div>
                             <div class="panel-body">
-
+                                <img src="img/home.png"  style="padding: 0px 50px 0px 50px" width="100%"  height="400px">
 
                             </div>
+                            <?php include './view/rodape.php'; ?>
+                            
+
 
                         </div>
                     </div>
@@ -58,6 +61,8 @@ $aluno = new Aluno();
                 </div>
 
             </div>
+
+
         </section>
         <script src="js/bootstrap.min.js"></script>
     </body>

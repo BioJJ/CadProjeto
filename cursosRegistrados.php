@@ -35,7 +35,7 @@ $curso = new Curso();
         }
     </script>
     <body onload="startTime()">
-        <?php include './menuPrincipal.php'; ?>
+        <?php include './view/menuPrincipal.php'; ?>
         <?php
         if (isset($_GET['acao']) && $_GET['acao'] == 'deletar'):
 
@@ -50,7 +50,7 @@ $curso = new Curso();
         <section id="main">
             <div class="container">
                 <div class="row">
-                    <?php include './menuLateral.php'; ?>
+                    <?php include './view/menuLateral.php'; ?>
                     <div class="col-md-9">
                         <div class="panel panel-default">
                             <div class="panel-heading main-color-bg">

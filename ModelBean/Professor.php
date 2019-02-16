@@ -68,6 +68,9 @@ class Professor extends ProfessorDao {
         return $stmt->execute();
     }
 
-    
+     public function inverterData($data){
+        return implode("-",array_reverse(explode("-",$data)));
+      
+    }
 
 }

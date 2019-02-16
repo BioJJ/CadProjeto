@@ -23,6 +23,7 @@ $aluno = new Aluno();
                 }
             }
         </script>
+
         <script type="text/javascript">
             function startTime() {
                 var today = new Date();
@@ -48,12 +49,12 @@ $aluno = new Aluno();
     </head>
     <body onload="startTime()">
 
-        <?php include './menuPrincipal.php'; ?>
+        <?php include './view/menuPrincipal.php'; ?>
         <?php
         if (isset($_POST['cadastrar'])):
 
             $nome = $_POST['nome'];
-            $data_nascimento = $_POST['data_nascimento'];
+            $data_nascimento = implode("-", array_reverse(explode("-", $_POST['data_nascimento'])));
             $logradouro = $_POST['logradouro'];
             $numero = $_POST['numero'];
             $bairro = $_POST['bairro'];
@@ -85,6 +86,7 @@ $aluno = new Aluno();
             $id_aluno = $_POST['id_aluno'];
             $nome = $_POST['nome'];
             $data_nascimento = $_POST['data_nascimento'];
+            $data_nascimento = implode("-", array_reverse(explode("-", $_POST['data_nascimento'])));
             $logradouro = $_POST['logradouro'];
             $numero = $_POST['numero'];
             $bairro = $_POST['bairro'];
@@ -113,7 +115,7 @@ $aluno = new Aluno();
         <section id="main">
             <div class="container">
                 <div class="row">
-                    <?php include './menuLateral.php'; ?>
+                    <?php include './view/menuLateral.php'; ?>
                     <div class="col-md-9">
                         <div class="panel panel-default">
                             <div class="panel-heading main-color-bg">
@@ -139,7 +141,7 @@ $aluno = new Aluno();
                                         <div class="col-md-4">
                                             <br>
                                             <b>Data de Nascimento</b>
-                                            <input type="text" value="<?php echo $resultado->data_nascimento; ?>" name="data_nascimento" class="form-control col-md-4" required >
+                                            <input type="text" value="<?php echo $aluno->inverterData($resultado->data_nascimento); ?>" name="data_nascimento" class="form-control col-md-4" onkeypress="formatarCampo(this, '##-##-####')" maxlength="10" required >
                                         </div> 
                                         <div class="col-md-4">
                                             <br>
@@ -181,10 +183,10 @@ $aluno = new Aluno();
                                             <br>
                                             <b>Curso</b>
                                             <select name="idcurso"  class="form-control col-md-4"required >
-                                                <option selected="true" > <?php echo $resultado2->curso; ?></option>
+                                                <option selected="true" value=" <?php echo $resultado2->idcurso; ?>"> <?php echo $resultado2->idcurso; ?> - <?php echo $resultado2->curso; ?></option>
 
                                                 <?php foreach ($aluno->findAllCurso() as $key => $value): ?>
-                                                    <option  value="<?php echo $value->id_curso; ?>"> <?php echo $value->nome; ?>  </option>
+                                                    <option  value="<?php echo $value->id_curso; ?>"> <?php echo $value->id_curso; ?> -  <?php echo $value->nome; ?>  </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -210,7 +212,7 @@ $aluno = new Aluno();
                                         <div class="col-md-4">
                                             <br>
                                             <b>Data de Nascimento</b>
-                                            <input type="text"  name="data_nascimento" class="form-control col-md-4" required >
+                                            <input type="text"  name="data_nascimento" class="form-control col-md-4" onkeypress="formatarCampo(this, '##-##-####')" maxlength="10" required >
                                         </div> 
                                         <div class="col-md-4">
                                             <br>

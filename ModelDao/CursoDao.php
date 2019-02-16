@@ -41,7 +41,7 @@ abstract class CursoDao extends DB {
     }
     
     public function findAllComNome($id_curso) {
-        $sql = "SELECT c.id_curso, c.nome, c.data_criacao, p.id_professor,  p.nome as professor from curso c INNER JOIN professor p on c.idprofessor=p.id_professor where c.idprofessor = :id_curso";
+        $sql = "SELECT c.id_curso, c.nome, c.data_criacao, c.idprofessor,  p.nome as professor from curso c INNER JOIN professor p on c.idprofessor=p.id_professor where c.idprofessor = :id_curso";
         $stmt = DB::prepare($sql);
         $stmt->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
         $stmt->execute();
@@ -54,7 +54,7 @@ abstract class CursoDao extends DB {
         $stmt->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
         return $stmt->execute();
     }
-   
+       
     
 
 }

@@ -129,10 +129,9 @@ class Aluno extends AlunoDao{
     }
 
     public function update($id_aluno) {
-        $sql = "UPDATE $this->table SET nome = :nome, data_criacao = :data_criacao, data_nascimento =: data_nascimento, logradouro =: logradouro, numero =: numero, bairro =: bairro, cidade =: cidade, estado =: estado, cep =: cep, idcurso =: idcurso WHERE id_aluno = :id_aluno";
+        $sql = "UPDATE $this->table SET nome = :nome, data_nascimento = :data_nascimento, logradouro = :logradouro, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, cep = :cep, idcurso = :idcurso WHERE id_aluno = :id_aluno";
         $stmt = DB::prepare($sql);
         $stmt->bindParam(':nome', $this->nome);
-        $stmt->bindParam(':data_criacao', $this->getData());
         $stmt->bindParam(':data_nascimento', $this->data_nascimento);
         $stmt->bindParam(':logradouro', $this->logradouro);
         $stmt->bindParam(':numero', $this->numero);
@@ -143,5 +142,9 @@ class Aluno extends AlunoDao{
         $stmt->bindParam(':idcurso', $this->idcurso);
         $stmt->bindParam(':id_aluno', $id_aluno);
         return $stmt->execute();
+    }
+    
+    public function inverterData($data, $separar='-', $juntar='-'){
+        return implode($juntar, array_reverse(explode($separar, $data)));
     }
 }
